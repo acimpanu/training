@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        function findPerfectSquares(array) {
+        var squares = new Array;
+        for (var i=0; i < array.length; i++) {
+            var num = array[i];
+            var numFactors = new Array;
+            for (var j=2; j < num; j++) {
+                if (num % j === 0) {
+                    numFactors.push(j);
+                }
+            }
+
+            for (var k=0; k < numFactors.length; k++) {
+                if (numFactors[k] * numFactors[k] === num) {
+                    squares.push(numFactors[k] * numFactors[k]);
+                }
+            }
+        }
+        console.log(squares);
+        }
+    </script>
+</body>
+</html>

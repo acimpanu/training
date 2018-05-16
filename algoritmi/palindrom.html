@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <!-- Palindrom -->
+        Numar: 
+        <input id="number" type="number" size="10">
+        <input type="submit" value="Calculeaza" onClick="isPalindrom()">
+        <br/>
+        <span id="result"></span>
+        <br/>
+
+
+    <script>
+        function isPalindrom(a) {
+            var a, no, b, temp = 0;
+            no = Number(document.getElementById('number').value);
+            b = no;
+            while (no > 0) {
+                a = no % 10;
+                no = parseInt(no / 10);
+                temp = temp * 10 + a;
+            }
+            if(temp == b) {
+                alert("Palindrome number");
+            }
+            else { 
+                alert("Not Palindrome number");
+            }
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <!-- Palindrom -->
+    <script>
+        var gcd = function (n, m) {
+        var r = 0;
+            while (n !== 0) {
+                r = m % n;
+                m = n;
+                n = r;
+            }
+            return m;
+        };
+    </script>
+</body>
+</html>

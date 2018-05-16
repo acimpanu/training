@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <!-- Palindrom -->
+    <script>
+        var number = 1234345;
+        var reversedNumber = 0;
+        var a = 0;
+        while(number > 0) {
+            a = number%10;
+            reversedNumber = reversedNumber * 10 + a;
+            number = parseInt(number/10);
+        }
+        console.log(reversedNumber);
+    </script>
+</body>
+</html>
