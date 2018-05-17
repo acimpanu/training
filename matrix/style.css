@@ -1,0 +1,29 @@
+#matrix,
+#matabs {
+    background: lightyellow; 
+    width: 300px;
+    height: 300px;
+    display: block;
+    float: left;
+    position: relative;
+}
+
+#matrix {
+    margin-right: 30px;
+}
+
+.culoareRosie {
+    background: red;
+}
+
+.culoareVerde {
+    background: green;
+}
+
+.culoareBlue {
+    background: blue;
+}
+
+.culoareDefault {
+    background: lightblue;
+}
