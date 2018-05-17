@@ -253,27 +253,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function chessAbsReverse() {
-        for (i = 0; i < nrLines; i++) {
-            for ( j= 0; j < nrCols; j++) {
-
-                xpos = (elemWidth + hDist) * j;
-                ypos = (elemHeight + vDist) * i;
-
-                if ((i + j)%2 == 0) {
-                    eachElem = drawElemAbs("culoareBlue", i, j);
-                } 
-                else {
-                    eachElem = drawElemAbs("culoareVerde", i, j);
-                }
-
-                eachElem.style.top = ypos;
-                eachElem.style.left = xpos;
-            }
-        }
-    }
-    
-    chessAbsReverse();
-
+    chessAbs();
 });
 
