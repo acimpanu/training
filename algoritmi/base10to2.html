@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        function getBinary(a) {
+            var a, r = "";
+            while (a>0) {
+               r=a%2+r;
+               a=Math.floor(a/2);
+            }
+           return r;
+        }
+        console.log(getBinary(12));
+    </script>
+</body>
+</html>

@@ -8,6 +8,10 @@
     position: relative;
 }
 
+#matrix div {
+    float: left;
+}
+
 #matrix {
     margin-right: 30px;
 }

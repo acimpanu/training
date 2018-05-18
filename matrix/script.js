@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let nrCols = 8, nrLines = 8, elemWidth = 30, elemHeight = 30, hDist = 5, vDist = 5;
+    var nrCols = 8, nrLines = 8, elemWidth = 30, elemHeight = 30, hDist = 5, vDist = 5;
 
     var matrix = document.getElementById('matrix');
 
-    function drawMatrix(colorCLass) {
+    function drawSquare(colorCLass) {
 
         var elem = document.createElement("div");
         matrix.appendChild(elem);
 
-        elem.style.width = elemWidth;
-        elem.style.height = elemHeight;
-        elem.style.marginRight = hDist;
-        elem.style.marginBottom = vDist;
+        elem.style.width = elemWidth + "px";
+        elem.style.height = elemHeight + "px";
+        //elem.style.marginRight = hDist + "px";
+        //elem.style.marginBottom = vDist + "px";
         elem.style.display = "inline-block";
         elem.style.position = "static";
         elem.classList.add(colorCLass);
@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
         for (i = 0; i < nrLines; i++) {
             for ( j= 0; j < nrCols; j++) {
                 if (i % 2 == 0) {
-                    drawMatrix("culoareVerde");
+                    drawSquare("culoareVerde");
                 } else {
-                    drawMatrix("culoareRosie");
+                    drawSquare("culoareRosie");
                 }
             }
         }
@@ -40,10 +40,10 @@ document.addEventListener("DOMContentLoaded", function() {
         for (i = 0; i < nrLines; i++) {
             for ( j= 0; j < nrCols; j++) {
                 if (i == j) {
-                    drawMatrix("culoareBlue");
+                    drawSquare("culoareBlue");
                 } 
                 else {
-                    drawMatrix("culoareDefault");
+                    drawSquare("culoareDefault");
                 }
             }
         }
@@ -57,10 +57,10 @@ document.addEventListener("DOMContentLoaded", function() {
         for (i = 0; i < nrLines; i++) {
             for ( j= 0; j < nrCols; j++) {
                 if (j>i) {
-                    drawMatrix("culoareBlue");
+                    drawSquare("culoareBlue");
                 } 
                 else {
-                    drawMatrix("culoareDefault");
+                    drawSquare("culoareDefault");
                 }
             }
         }
@@ -74,10 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
         for (i = 0; i < nrLines; i++) {
             for ( j= 0; j < nrCols; j++) {
                 if (i+j==(Math.max(nrCols, nrLines) - 1)) {
-                    drawMatrix("culoareBlue");
+                    drawSquare("culoareBlue");
                 } 
                 else {
-                    drawMatrix("culoareDefault");
+                    drawSquare("culoareDefault");
                 }
             }
         }
@@ -89,9 +89,9 @@ document.addEventListener("DOMContentLoaded", function() {
         for (i = 0; i < nrLines; i++) {
             for ( j= 0; j < nrCols; j++) {
                 if ((i + j)%2 == 0) {
-                    drawMatrix("culoareBlue");
+                    drawSquare("culoareBlue");
                 } else {
-                    drawMatrix("culoareDefalut");
+                    drawSquare("culoareDefalut");
                 }
             }
         }
@@ -108,8 +108,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var elemAbs = document.createElement("div");
         matabs.appendChild(elemAbs);
 
-        elemAbs.style.width = elemWidth;
-        elemAbs.style.height = elemHeight;
+        elemAbs.style.width = elemWidth + "px";
+        elemAbs.style.height = elemHeight + "px";
         elemAbs.id = "s" + i + j;
         elemAbs.style.position = "absolute";
         elemAbs.classList.add(colorCLass);
@@ -125,8 +125,8 @@ document.addEventListener("DOMContentLoaded", function() {
                ypos = (elemHeight + vDist) * i;
 
                eachElem = drawElemAbs("culoareBlue", i, j);
-               eachElem.style.top = ypos;
-               eachElem.style.left = xpos;
+               eachElem.style.top = ypos + "px";
+               eachElem.style.left = xpos + "px";
             }
         }
     }
@@ -147,8 +147,8 @@ document.addEventListener("DOMContentLoaded", function() {
                } else {
                     eachElem = drawElemAbs("culoareVerde", i, j);
                }               
-               eachElem.style.top = ypos;
-               eachElem.style.left = xpos;
+               eachElem.style.top = ypos + "px";
+               eachElem.style.left = xpos + "px";
                
             }
         }
@@ -174,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     eachElem = drawElemAbs("culoareVerde", i, j);
                 }
 
-                eachElem.style.top = ypos;
-                eachElem.style.left = xpos;
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
             }
         }
     }
@@ -199,8 +199,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     eachElem = drawElemAbs("culoareVerde", i, j);
                 }
 
-                eachElem.style.top = ypos;
-                eachElem.style.left = xpos;
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
             }
         }
     }
@@ -223,8 +223,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     eachElem = drawElemAbs("culoareVerde", i, j);
                 }
 
-                eachElem.style.top = ypos;
-                eachElem.style.left = xpos;
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
             }
         }
     }
@@ -247,12 +247,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     eachElem = drawElemAbs("culoareVerde", i, j);
                 }
 
-                eachElem.style.top = ypos;
-                eachElem.style.left = xpos;
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
             }
         }
     }
 
     chessAbs();
+
+    function chessAbs() {
+        matrix.onclick
+    }
+    //chessAbsReset();
 });
 
