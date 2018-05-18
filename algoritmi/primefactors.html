@@ -1,37 +1,18 @@
 <!DOCTYPE HTML>
 <html>
 <body>
-    <script>
-        //integer is the value for which we are finding prime factors
-        var a = 13195,
-            primeArray = [],
-            isPrime;
-
-        //find divisors starting with 2
-        for(i = 2; i <= a; i++) {
-            if (a % i==0) {
-                
-                //check if divisor is prime
-                for (var j = 2; j <= i/2; j++) {
-                    if (i % j == 0) {
-                        isPrime = false;
-                    } else {
-                        isPrime = true;
-                    }
+    <script>    
+        function primeFactor(a) {
+            var a, i, factorsArray=[];
+            for (i = 2; i <= a; i++) {
+                while (a % i == 0) {
+                    factorsArray.push(i);
+                    a /= i;
                 }
-
-                //if divisor is prime
-                if (isPrime == true) {
-                    a /= i
-                    primeArray.push(i);
-                }
-            }   
+            }
+            return factorsArray;
         }
-
-        for (var k = 0; k < primeArray.length; k++) {
-            console.log(primeArray[k]);
-        }
-
+        console.log(primeFactor(13190));
     </script>
 </body>
 </html>
