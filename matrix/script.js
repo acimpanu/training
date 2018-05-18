@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var nrCols = 8, nrLines = 8, elemWidth = 30, elemHeight = 30, hDist = 5, vDist = 5;
+    var nrCols = 8, 
+        nrLines = 8, 
+        elemWidth = 30, 
+        elemHeight = 30, 
+        hDist = 5, 
+        vDist = 5;
 
     var matrix = document.getElementById('matrix');
 
@@ -10,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         elem.style.width = elemWidth + "px";
         elem.style.height = elemHeight + "px";
-        //elem.style.marginRight = hDist + "px";
-        //elem.style.marginBottom = vDist + "px";
+        elem.style.marginRight = hDist + "px";
+        elem.style.marginBottom = vDist + "px";
         elem.style.display = "inline-block";
         elem.style.position = "static";
         elem.classList.add(colorCLass);
@@ -255,9 +260,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     chessAbs();
 
-    function chessAbs() {
-        matrix.onclick
+    function chessReset(i,j) {
+        for (i = 0; i < nrLines; i++) {
+            for ( j= 0; j < nrCols; j++) {
+                if (document.getElementById("s" + i + j).classList.length > 0 && !document.getElementById("s" + i + j).classList.contains("culoareDefalut")) {
+                    displayMatrixAbs("culoareDefault");
+                }
+            }
+        }
     }
-    //chessAbsReset();
+
+    matabs.onclick = function(){chessReset()};
+
+
 });
 
