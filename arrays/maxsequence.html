@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        //var arr = [2, 2, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5],
+        var arr = [2, 3, 1, 1, 1, 1, 4, 4, 4, 4, 4, 5, 6, 7, 8, 9,9];
+        var count = 1;
+        var start = 0;
+        var i;
+        var val = arr[0];
+        var countMax = 1;
+        var valMax = arr[0];
+        var startMax = 0;
+        var max = 0;
+
+
+        for ( i = 0; i < arr.length; i++ ) {
+            if (arr[i] == arr[i+1]) {
+                count ++;
+            } else {    
+                if (count > countMax) {
+                    countMax = count;
+                    valMax = val;
+                    startMax = start;
+                }
+                count = 1;
+                start = i+1;
+                val = arr[i+1];
+            }
+
+           
+            
+        }
+        console.log("Nr max elemente din secventa este: "  + countMax);
+        console.log("Vectorul este: " + arr);
+        console.log("Indexul este: " + startMax);
+        console.log("Numarul din secventa este: " + valMax);
+
+
+        
+
+    </script>
+</body>
+</html>

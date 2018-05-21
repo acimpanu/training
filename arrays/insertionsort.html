@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        let arr = [5, 3, 8, 1];
+        let j, key, i;
+
+        for (j = 1; j < arr.length; j++) {
+            key = arr[j];
+            i = j - 1;
+            while (i>=0 && arr[i] > key) {
+                arr[i+1] = arr [i];
+                i = i - 1; 
+            }
+            arr[i+1] = key;
+        }
+        console.log(arr);
+
+    </script>
+</body>
+</html>
