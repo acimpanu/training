@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="style.css"></head>
+<body>
+    <div id="circle">
+        <div id="pulse"></div>
+    </div>
+    <script>
+        var pulseDiv = document.getElementById("pulse");
+        var pulseCont = document.getElementById("circle");
+        var duration = 500;
+        var i = 0;
+        var min = 50;
+        var max = 100;
+        var step = 6;
+        var val;
+        var leftpos = 0;
+        var rightpos = 0;
+        
+
+
+        var pulseWidth = pulseDiv.width;
+        var pulseHeight = pulseDiv.height;
+
+        var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+
+        function drawCircle() {   
+            i += step;
+            if (i > max || i < min) {
+                step *= -1;
+            } 
+
+            pulseDiv.style.width = i + "px";
+            pulseDiv.style.height = i + "px";
+            requestAnimationFrame(drawCircle);
+        }
+        
+        //requestAnimationFrame(drawCircle);
+
+        function drawCircle2() {   
+            i += .1;
+            leftpos = 50 * Math.sin(i) + 50;
+            val = 50 * Math.abs(Math.sin(i)) + 50;
+
+            pulseDiv.style.width = val + "px";
+            pulseDiv.style.height = val + "px";
+            pulseDiv.style.marginLeft = -leftpos + "px";
+
+            requestAnimationFrame(drawCircle2);
+        }
+        requestAnimationFrame(drawCircle2);
+
+
+    </script>
+</body>
+</html>

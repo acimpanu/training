@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.circle,
+#circle {
+    //background: lightyellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pulse {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: lightseagreen;
+    animation: animate 3s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        box-shadow: 0 0 0 0 rgba(32, 178, 170, .7), 0 0 0 0 rgba(32, 178, 170, .7);
+    }
+    30% {
+        box-shadow: 0 0 0 30px rgba(32, 178, 170, 0), 0 0 0 0 rgba(32, 178, 170, .7);
+    }
+    75% {
+        box-shadow: 0 0 0 30px rgba(32, 178, 170, 0), 0 0 0 30px rgba(32, 178, 170, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(32, 178, 170, 0), 0 0 0 30px rgba(32, 178, 170, 0);
+    }
+}
+
+#pulse {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: lightseagreen;
+}

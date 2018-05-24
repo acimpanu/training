@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        function getDecimal(a) {
+            var a;
+            var suma = 0;
+            var i = 0;
+
+            while (a!=0) {
+                uc = a % 10;
+                a = parseInt(a/10);
+                suma += Math.pow(2,i) * uc; 
+                i++; 
+            }
+            console.log(suma);
+            return suma;
+        }
+        console.log(getDecimal(1101));
+        
+    </script>
+</body>
+</html>
