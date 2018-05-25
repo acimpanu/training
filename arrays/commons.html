@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        var a = [6, 6, 6, 1, 7];
+        var b = [6, 1, 2, 3, 4, 5, 5, 5, 5];
+        var arrCount = {};
+
+         for (var i = 0; i <  b.length; i++) {
+            if (arrCount[b[i]]) {
+                arrCount[b[i]].count++;
+                if (arrCount[b[i]].source.indexOf("B") > -1) {
+                    arrCount[b[i]].source += "";
+                } else {
+                    arrCount[b[i]].source += "B";
+                }
+            } else {
+                arrCount[b[i]] = {};
+                arrCount[b[i]].count = 1;
+                arrCount[b[i]].source = "B";
+            }
+        }
+
+
+        for (var i = 0; i <  a.length; i++) {
+            if (arrCount[a[i]]) {
+                arrCount[a[i]].count++;
+                if (arrCount[a[i]].source.indexOf("A") > -1) {
+                    arrCount[a[i]].source += "";
+                } else {
+                    arrCount[a[i]].source += "A";
+                }
+                
+            } else {
+                arrCount[a[i]] = {};
+                arrCount[a[i]].count = 1;
+                arrCount[a[i]].source = "A";
+            }
+        }
+
+    
+        for (var d in arrCount) {
+            if (arrCount[d].source.indexOf("A") > -1 && arrCount[d].source.indexOf("B") > -1) {
+                console.log("Elemente comune: " + d);
+            }
+            if (arrCount[d].source.indexOf("A") > -1 && arrCount[d].source.indexOf("B") == -1) {
+                console.log("Elemente din A: " + d);
+            }
+
+            if (arrCount[d].source.indexOf("A") == -1 && arrCount[d].source.indexOf("B") > -1) {
+                console.log("Elemente din B: " + d);
+            }
+        }
+
+    </script>
+</body>
+</html>

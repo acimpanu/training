@@ -2,7 +2,8 @@
 <html>
 <body>
     <script>
-        var arr = [2, 3, 1, 1, 1, 1, 4, 4, 4, 4, 4, 5, 6, 7, 8, 9,9];
+        //var arr = [2, 3, 1, 1, 1, 1, 4, 4, 4, 4, 4, 5, 6, 7, 8, 9,9];
+        var arr = [2, 3, 1, 4, 5, 7,8,9,4, 4, 4, 5, 5, 5, 9, 8 , 10, 11, 12, 13, 14, 15, 16, 5, 5,5];
         var count = 1;
         var start = 0;
         var i;
@@ -11,10 +12,11 @@
         var valMax = arr[0];
         var startMax = 0;
         var max = 0;
+        var newarr = [];
 
 
         for ( i = 0; i < arr.length; i++ ) {
-            if (arr[i] == arr[i+1]) {
+            if (arr[i] < arr[i+1]) {
                 count ++;
             } else {    
                 if (count > countMax) {
@@ -25,16 +27,18 @@
                 count = 1;
                 start = i+1;
                 val = arr[i+1];
-            }  
+            }               
         }
         
+        var s = [];
+        for (i=startMax; i < startMax+countMax; i++) {
+            s+= arr[i] + " ";
+        }
+
+        console.log(s);
         console.log("Nr max elemente din secventa este: "  + countMax);
         console.log("Vectorul este: " + arr);
         console.log("Indexul este: " + startMax);
-        console.log("Numarul din secventa este: " + valMax);
-
-
-        
 
     </script>
 </body>
