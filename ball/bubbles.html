@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="style.css"></head>
+<body>
+    
+    <script>
+        var collection = [];
+        var mouseX = document.body.clientWidth/2;
+        var mouseY = document.body.clientHeight/2;
+        var n = 3;
+
+        init();
+        var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+
+        
+        function addElem(index) {
+            var circle = document.createElement("div");
+            circle.className = "bubble";
+            circle.style.width = "20px";
+            circle.style.height = "20px";
+            circle.style.border = "1px solid black";
+            circle.style.borderRadius = "50%";
+            circle.style.position = "absolute";
+            circle.id = "s" + index;
+            
+            document.body.appendChild(circle);
+            return circle;
+        }
+
+        function init() {
+            var a;
+            var b;
+            var elem;
+
+            for (var j = 0; j < n; j++) {
+                elem = addElem(j);
+
+                a = mouseX;   
+                b = mouseY;
+
+                elem.style.left = a + "px";
+                elem.style.top = b + "px";
+                collection.push({
+                    element: elem,       
+                    posX: a,
+                    posY: b,
+                    radius: Math.floor(Math.random() * 11),
+                    oscSpeed: Math.random(),
+                    osc: 0, 
+                    v: Math.floor(Math.random() * 10) + 5,
+                    oscDist: 5 + Math.floor(Math.random() * 10)
+                });
+            }
+        }
+   
+
+        function moveBubble() {    
+              var elem;     
+              for (var j = 0; j < n; j++) {
+                elem = collection[j].element;
+                collection[j].osc += collection[j].oscSpeed;
+                collection[j].posX = collection[j].posX + Math.sin(collection[j].osc) * collection[j].oscDist;
+                collection[j].posY -= collection[j].v;
+
+                elem.style.left = collection[j].posX + "px";
+                elem.style.top = collection[j].posY + "px";
+
+                if (collection[j].posY < 0) {
+                    collection[j].posX = mouseX;
+                    collection[j].posY = mouseY;
+
+                    collection[j].radius = Math.floor(Math.random() * 11);
+                    collection[j].oscSpeed = Math.random();
+                    
+                    collection[j].v = Math.floor(Math.random() * 10) + 5;
+                    collection[j].oscDist = 5 + Math.floor(Math.random() * 10);
+                }
+            }
+            
+            requestAnimationFrame(moveBubble);
+        }
+        requestAnimationFrame(moveBubble);
+
+        document.addEventListener("mousemove", mousemove);
+        function mousemove(event) {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        };
+   
+
+    </script>
+</body>
+</html>
