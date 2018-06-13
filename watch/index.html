@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            #watch {
+                margin-top: 50px;
+                margin-left: 50px;
+                position: relative;
+                top: 100px;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            #hour {
+                position: relative;
+                width: 75px;
+                height: 3px;
+                top: 149px;
+                left: 150px;
+                background-color:red;
+                transform-origin: top left;
+            }
+
+            #min {
+                position: relative;
+                width: 100px;
+                height: 3px;
+                top: 150px;
+                left: 150px;
+                background-color:green;
+                transform-origin: top left;
+            }
+
+            #sec {
+                position:relative;
+                width: 150px;
+                height: 3px;
+                top: 155px;
+                left: 153px;
+                background-color:pink;
+                transform-origin: top left;
+            }
+           
+        </style>
+    </head>
+    <div id="watch">
+    </div>
+    
+<body>
+    <script>
+    var watch = document.getElementById('watch'); 
+    var elemWidth = 300; 
+    var elemHeight = 300; 
+    var dots = 12;
+
+    function draw() {
+        var circle = document.createElement("div");
+        watch.style.width = elemWidth + "px";
+        watch.style.height = elemHeight + "px";
+        watch.style.borderRadius = "50%";
+       // watch.style.border = "1px solid black";
+    }
+
+    function digit(k) {
+        var dig = document.createElement("div");
+        dig.style.width = 16 + "px";
+        dig.style.height = 16 + "px";
+        dig.textContent = k;
+        dig.style.position = "absolute";
+        dig.className = "dig";
+        dig.style.textAlign = "center";
+        dig.id = "dig" + (k + 1);
+        watch.appendChild(dig);
+        return dig;
+    }
+    draw();  
+
+    function drawSec() {
+        var sec = document.createElement("div")
+        sec.id = "sec";
+        watch.appendChild(sec);
+    }
+
+    function drawMin() {
+        var min = document.createElement("div");
+        min.id = "min";
+        watch.appendChild(min);
+    }
+
+    function drawHour() {
+        var hour = document.createElement("div");
+        hour.id = "hour";
+        watch.appendChild(hour);
+    }
+        drawSec();
+        drawMin();
+        drawHour();
+
+        var angle = -45;
+        var newA = toRadians(angle);
+        var radius = elemWidth/2;
+        var step = (2*Math.PI) / dots;
+        
+    for (var i = 1; i < dots + 1; i++) {
+        number = digit(i);
+
+        var x = Math.round(elemWidth/2 + elemWidth/2 * Math.cos(newA) - 8);
+        var y = Math.round(elemHeight/2 + elemHeight/2 * Math.sin(newA) - 8);
+        
+        number.style.top = y + "px";
+        number.style.left = x + "px";
+
+        newA += step;
+    }
+    
+	// function clock(){
+    //     var secPos;
+    //     var minPos;
+    //     var hourPos;
+	// 	var date = new Date;
+    //     secPos = date.getSeconds() * (360 / 60);
+    //     minPos = date.getMinutes() * (360 / 60) + secPos / 60;
+    //     hourPos = date.getHours() % 12 * (360 / 12) + minPos / 60 + secPos / 3600;
+    
+    //     setAttr('hour', hourPos - 90);
+    //     setAttr('min',  minPos - 90);
+    //     setAttr('sec', secPos - 90);
+
+    //     setInterval(clock, 1000)
+    // }
+
+    let clock1 = setTimeout(function clock() {
+        var secPos;
+        var minPos;
+        var hourPos;
+		var date = new Date;
+        secPos = date.getSeconds() * (360 / 60);
+        minPos = date.getMinutes() * (360 / 60) + secPos / 60;
+        hourPos = date.getHours() % 12 * (360 / 12) + minPos / 60 + secPos / 3600;
+    
+        setAttr('hour', hourPos - 90);
+        setAttr('min',  minPos - 90);
+        setAttr('sec', secPos - 90);
+    clock1 = setTimeout(clock, 50);
+    }, 50);
+
+
+
+	function setAttr(id,val){
+		var a = 'rotate(' + val + 'deg)';
+		document.getElementById(id).style.transform = a;
+	}
+
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
+    }
+
+    function toDegree(angle) {
+        return angle * (180 / Math.PI);
+    }
+    </script>
+</body>
+</html>

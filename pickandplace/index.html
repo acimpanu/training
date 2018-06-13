@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+           body {
+                -webkit-user-select: none;  /* Chrome all / Safari all */
+                -moz-user-select: none;     /* Firefox all */
+                -ms-user-select: none;      /* IE 10+ */
+                user-select: none;    
+                            }
+            .container {
+                display: inline-block;
+                width: 275px;
+                position: relative;
+                height: 275px;
+                color: white;
+            }
+
+            .box {
+                display: inline-block;
+                float: left;
+                color: #fff;
+            }  
+        </style>
+    </head>
+
+<body>
+    <div class="container" id="dragtarget"></div>
+    <div class="container" id="droptarget"></div>
+    
+    <script>
+    
+    var firstCont = document.getElementById("dragtarget");
+    var secondCont = document.getElementById("droptarget");
+    var nrCols = 5;
+    var nrLines = 5;
+    var elemWidth = 50;
+    var elemHeight = 50; 
+    var hDist = 5; 
+    var vDist = 5;
+    var arr = [];
+    var shiftX;
+    var shiftY;
+    var movedEl;
+    var cln;
+
+    function drawBox(i, j, prefix) {
+        var box = document.createElement("div");
+        box.style.width = elemWidth + "px";
+        box.style.height = elemHeight + "px";
+        box.style.position = "absolute";
+        box.id = prefix + i + j;
+        box.className = "box";
+        return box;
+    }
+
+    function drawMatrixLeft() {
+        var xpos, ypos;
+
+        for (i = 0; i < nrLines; i++) {
+            for ( j= 0; j < nrCols; j++) {
+                xpos = (elemWidth + hDist) * j;
+                ypos = (elemHeight + vDist) * i;
+
+                eachElem = drawBox(i, j, "s");
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
+                eachElem.textContent = i + "" +j;
+                eachElem.style.background = "black";
+                firstCont.appendChild(eachElem);
+            }
+        }
+    }
+
+    function drawMatrixRight() {
+        var xpos, ypos;
+
+        for (i = 0; i < nrLines; i++) {
+            for ( j= 0; j < nrCols; j++) {
+                xpos = (elemWidth + hDist) * j;
+                ypos = (elemHeight + vDist) * i;
+
+                eachElem = drawBox(i, j, "d");
+                eachElem.style.top = ypos + "px";
+                eachElem.style.left = xpos + "px";
+                eachElem.style.background = "pink";
+                secondCont.appendChild(eachElem);
+            }
+        }
+    }
+
+    drawMatrixLeft();
+    drawMatrixRight();
+
+    var myObj = document.getElementById("dragtarget");
+    var dropObj = document.getElementById("droptarget");
+    var body = document.getElementsByTagName("body")[0];
+    myObj.addEventListener("mousedown", startMoving);
+    dropObj.addEventListener("mousedown", startMovingBack);
+
+    function startMoving(e) {
+        var dragElem = event.target;
+        if (dragElem.id.indexOf("s") == -1) {
+            return;
+        }
+
+        shiftX = e.clientX - dragElem.getBoundingClientRect().left;
+        shiftY = e.clientY - dragElem.getBoundingClientRect().top;
+
+        cloneNode();
+
+        function cloneNode() {
+            cln = dragElem.cloneNode(true);
+            cln.style.opacity = ".5";
+            body.appendChild(cln);
+        }
+
+        function moveAt(clientX, clientY) {
+            let newX = clientX - shiftX;
+            let newY = clientY - shiftY;
+
+            cln.style.left = newX + "px";
+            cln.style.top = newY + "px";   
+        }
+
+        function mouseMove(e) {
+            moveAt(e.clientX, e.clientY);
+        }
+
+        function mouseUp(e) {
+            var newDragElemX;
+            var newDragElemY;
+            body.removeChild(cln);
+
+            elementMouseIsOver = document.elementFromPoint(e.clientX, e.clientY);
+
+            if (elementMouseIsOver.className != "taken") {
+                elementMouseIsOver.className = "taken";
+                newDragElemX = elementMouseIsOver.style.left;
+                newDragElemY = elementMouseIsOver.style.top;
+                movedEl = secondCont.appendChild(dragElem);
+                movedEl.style.left = newDragElemX;
+                movedEl.style.top = newDragElemY;
+                movedEl.className = "taken";
+            }
+
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        }
+
+        function finishDrag() {
+            document.removeEventListener('mousemove', onMouseMove);
+        }
+
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('mouseup', mouseUp);
+    }
+
+    function startMovingBack(e) {
+        var dragElem = event.target;
+            if (dragElem.id.indexOf("s") == -1) {
+                return;
+            }
+            newPos = firstCont.appendChild(dragElem);
+            var getn = newPos.id;
+            var regex = /(\d+)/g;
+            var digits = getn.match(regex).toString().split('');
+            var elementMouseIsOver1 = document.elementFromPoint(e.clientX, e.clientY);
+            elementMouseIsOver1.className = "box";
+            var myX = digits[0] * (elemWidth + hDist);
+            var myY = digits[1] * (elemHeight + vDist);
+
+            newPos.style.left = myY + "px";
+            newPos.style.top = myX + "px";
+    }
+
+    
+    </script>
+</body>
+</html>

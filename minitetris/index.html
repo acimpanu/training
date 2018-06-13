@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+        #holder {
+            margin-left: 100px;
+            margin-bottom: 15px;
+        }  
+
+        #pause {
+            margin-left: 100px;
+        }   
+
+        .fall {
+            border: 1px solid white;
+            box-sizing: border-box;
+        }  
+
+        .active {
+            background: lightseagreen;
+        } 
+
+        .inactive {
+            background: pink;
+        }
+        </style>
+    </head>
+
+<body>
+    <div id="holder"></div>
+    <button type="button" id="pause">Pause</button>
+    <button type="button" id="resume">Resume</button>
+    <script>
+        var nrCols = 5;
+        var nrLines = 10;
+        var sWidth = 30;
+        var numBlocks = 0;
+        var xpos;
+        var ypos;
+        var speed = 250;
+        var activeEl; 
+        var i = 0;
+        var j = 0;
+        var positionX = 0;
+        var positionY = 0;
+        var nextDown;
+        var matrix = [];
+        var gameOverLine = nrLines;
+        var loop;
+
+        var holder = document.getElementById("holder");
+            holder.style.height = nrLines * sWidth + "px";
+            holder.style.width = nrCols * sWidth + "px";
+            holder.style.position = "relative";
+        
+        function drawSquare() {           
+            var patrat = document.createElement("div");
+            patrat.style.width = sWidth + "px";
+            patrat.style.height = sWidth + "px";
+            patrat.style.position = "absolute";
+            patrat.style.left = xpos + "px";
+            patrat.style.top = ypos + "px";
+            return patrat;
+        }
+
+        function drawMatrix(i, j) {
+            var xpos, ypos;
+
+            for (var i = 0; i < nrLines; i++) {
+                for (var j= 0; j < nrCols; j++) {
+                    xpos = sWidth * j;
+                    ypos = sWidth * i;
+                    eachElem = drawSquare();
+                    eachElem.style.top = ypos + "px";
+                    eachElem.style.left = xpos + "px";
+                    eachElem.className = "inactive";
+                    eachElem.id = "s" + i + j;
+                    holder.appendChild(eachElem);  
+                }  
+            }
+            return eachElem;
+        }
+
+        function drawModel() {        
+            for (var i = 0; i < nrLines; i++) {
+                matrix[i] = [];
+
+                for (var j = 0; j < nrCols; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+            //console.table(matrix);
+            //console.log(matrix);  
+        }
+
+        function updateMatrix() {
+            for (var i = 0; i < nrLines; i++) {
+                for (var j = 0; j < nrCols; j++) {
+                    activeEl = document.getElementById("s" + i + j);
+                    if (matrix[i][j] == 0) { 
+                        activeEl.className = "inactive";
+                    } else {
+                        activeEl.className = "active";
+                    }
+                }
+            }
+        }
+       
+        function init() {
+            j = 2;
+            drawModel();
+            drawMatrix();
+            matrix[i][j] = 1; 
+            updateMatrix();
+            loop = setInterval(gameLoop, speed);
+        }
+
+        init();
+
+        function gameLoop() {           
+            if (i < nrLines - 1 && matrix[i+1][j] == 0) {
+                matrix[i+1][j] = 1;
+                matrix[i][j] = 0;    
+                i++;
+            } else {
+                gameOver();
+                i = 0;
+                j = 2;
+                matrix[i][j] = 1; 
+            }
+            updateMatrix(); 
+            checkCompletedLines(); 
+        }
+
+        function checkCompletedLines() {
+            var lines = [];
+            var complete = true;
+            for (var j = 0; j < nrCols; j++) {
+                if (matrix[nrLines-1][j] == 0) {
+                    complete = false;
+                }
+            }
+            if (complete) {
+                lines.push(nrLines-1);
+            } 
+
+            //console.log("The number of deleted lines: " + lines.length);
+
+            if (lines.length > 0) {
+                removeCompletedLines(lines);
+                moveRestDown(lines);
+            }
+        }
+
+        function removeCompletedLines(lines) {
+            var currentLine;
+            for (var line = 0; line < lines.length; line++) {
+                currentLine = lines[line];
+                for (var j = 0; j < nrCols; j++) {
+                    matrix[currentLine][j] = false;             
+                }
+            }          
+        }
+
+        function moveRestDown(lines) {
+            var currentLine;
+            for (var line = 0; line < lines.length; line++) {
+                currentLine = lines[line]
+                for (var i = currentLine; i > 0; i--) {
+                    for (var j = 0; j < nrCols; j++) {
+                        matrix[i][j] = matrix[i - 1][j];
+                    }
+                }
+            }
+        }
+
+        function move(x) {
+            if (j + x > -1 && j + x < nrCols && matrix[i][j] == 1 && matrix[i][j+x] == 0) {
+                matrix[i][j] = 0;
+                matrix[i][j+x] = 1;
+                j = j + x; 
+            }
+            //console.log(matrix);
+        }       
+
+        function gameOver() {
+            if (matrix[0][2] == 1) {                    
+                drawModel();
+            }              
+        }
+
+        window.addEventListener("keydown", keyDown);
+        function keyDown(e) {
+            var keyCode = e.keyCode;
+            if (keyCode == "37") {
+                move(-1);
+            }
+            if (keyCode == "39") {
+                move(1);
+            }
+        } 
+
+        var pauseBtn = document.getElementById("pause");
+        var resumeBtn = document.getElementById("resume");
+
+        pauseBtn.addEventListener("click", pauseClick);
+        function pauseClick() {
+            clearInterval(loop);
+            loop = undefined;
+        }
+
+        resumeBtn.addEventListener("click", resumeClick);
+        function resumeClick() {
+            if(!loop) {
+                loop = setInterval(gameLoop, speed);
+            }
+        }
+
+    </script>
+</body>
+</html>

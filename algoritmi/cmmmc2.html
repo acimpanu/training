@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        var n, m, i, j, z;
+        var a = [];
+        var b = [];
+        var arrCount = [];
+        var count = 0;
+        var s = [];
+        var prod = 1;
+        var x = 0;
+        var counter = 0;
+
+        /* Descompunere nr in factori primi*/
+        function primeFactor(z) {
+            var a, i, factorsArray=[];
+            for (i = 2; i <= z; i++) {
+                counter = 0;
+                while (z % i == 0) {
+                    z /= i;
+                    counter++;
+                }
+                if (counter > 0) {
+                    factorsArray.push({
+                        number: i,
+                        power: counter
+                    });   
+                }
+            }
+            return factorsArray;
+        }
+
+
+        function gcd(n, m) {
+            //console.log(primeFactor(n));
+            a = primeFactor(n);
+            b = primeFactor(m);
+            var min = 1;
+
+            for (i = 0; i < a.length; i++){
+                for (j = 0; j < b.length; j++) {
+
+                    if (a[i].number == b[j].number) {
+
+                        if (a[i].power <= b[j].power) {
+                            min = a[i].power;
+                        } else {
+                           min = b[j].power;
+                        }
+                        
+                        s.push({
+                            number: a[i].number,
+                            power: min
+                        });
+
+                        prod *= Math.pow(s[i].number,min);
+                    }
+                }
+            }
+            return prod;
+        }
+
+        console.log(gcd(200,150));
+        console.log(a);
+        console.log(b);
+        console.log(s);  
+        console.log(prod);
+
+
+        
+    </script>
+</body>
+</html>

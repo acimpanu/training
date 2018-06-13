@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            #slider {
+                height: 5px;
+                margin-top: 20px;
+                display: inline-block;
+                position: relative;
+                margin-left: 100px;
+            }
+
+            .thumb {
+                background: seagreen;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%; 
+                position: absolute;
+                top: -10px;
+                left: 13px;
+                margin-left: -13px;
+                cursor: pointer;
+                opacity: .5;
+            }
+
+            .btn {
+                border: 1px solid black;
+                display: inline-block;
+                width: 30px;
+                height: 20px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <div id="slider">
+        <div class="thumb" id="myDiv"></div>
+    </div>
+    <div class="btn" id="btn">50</div>
+    
+<body>
+    <script>
+
+    var slider = document.getElementById('slider'); 
+    var thumb = document.getElementById('myDiv'); 
+    var btn = document.getElementById('btn');
+    var sliderOffset = slider.offsetLeft;
+    
+
+    var min = 100;
+    var max = 130;
+    var sliderWidth = 200;
+    var limitLeft = 13;
+    var limitRight = sliderWidth - 13;
+
+    var percent;
+    var x;
+
+    slider.style.background = "#dedede"
+    slider.style.width = sliderWidth + "px";
+
+    var shiftX;
+
+    thumb.addEventListener("mousedown", mousedown);
+    function mousedown(e) {
+        mousemove(e);
+        document.addEventListener('mousemove', mousemove);
+        document.addEventListener('mouseup', mouseup);
+    }
+
+    function mousemove(e) {
+        var newLeft = e.clientX - sliderOffset;
+        var mouseX;
+        var percent;
+        var valoare;
+    
+        if (newLeft < limitLeft) {
+            newLeft = limitLeft;
+        }
+
+        if (newLeft > limitRight) {
+            newLeft = limitRight;
+        }
+
+        percent = (100 * (newLeft - limitLeft)) / (limitRight - limitLeft);
+        valoare =  percent * (max - min) / 100 + min;
+ 
+        console.log("valoare:" + valoare);
+        console.log("procent:", percent);
+        thumb.style.left = newLeft + 'px';
+    }
+
+    function mouseup(e) {
+        document.removeEventListener('mouseup', mouseup);
+        document.removeEventListener('mousemove', mousemove);
+    }
+
+    slider.addEventListener("mousedown", clickCoord);
+    function clickCoord(e) {
+       mousemove(e);
+    }
+
+    //btn.addEventListener("click", setValue);
+
+    var a = min;
+    var t = setInterval(function() {
+        setValue(a);
+        
+        if (a < max) {
+            a++;
+        } else {
+            clearInterval(t);
+        }
+    }, 16);
+
+    function setValue(x) {
+        // var procent = (x - x) * 100 / (max - x); 
+        // var newLeft = (procent * (limitRight - limitLeft)) / 100  + limitLeft;
+        // thumb.style.left = newLeft + 'px';
+        // console.log("procent:" + procent);
+        
+        // valoare =  procent * (max - min) / 100 + min;
+       
+        // console.log("valoare:" + valoare);
+
+        var procent = (x - min) * 100 / (max - min); 
+        var newLeft = (procent * (limitRight - limitLeft)) / 100  + limitLeft;
+        thumb.style.left = newLeft + 'px';
+            console.log("procent:" + procent);
+        valoare =  procent * (max - min) / 100 + min;
+            console.log("valoare:" + valoare);
+    }
+
+
+    </script>
+</body>
+</html>

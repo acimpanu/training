@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+            }
+            .default {
+                background-color: #dedede;
+                transition: left .2s, top .2s;
+                /*transform: translateZ(0);*/
+            }
+
+            .green {
+                background-color: #006600;
+            }
+            #matrix {
+                /*transform: translateZ(0);*/
+            }
+        </style>
+    </head>
+    <div id="matrix"></div>
+<body>
+    
+    <script>
+        var nrCols = 60;
+        var nrLines = 60; 
+
+        var elemWidth = 10; 
+        var elemHeight = 10; 
+
+        var hDist = 5;
+        var vDist = 5;
+
+        var r = 40;
+
+        var matrix = document.getElementById('matrix');
+        var body = document.body;
+
+        var mouseX = matrix.clientWidth/2;
+        var mouseY = matrix.clientHeight/2;
+
+        var collection = [];
+
+        var squareParentOffsetLeft;
+        var squareParentOffsetTop;
+
+        function addElem(colorCLass, i, j) {
+            var dot = document.createElement("div");
+
+            dot.style.width = elemWidth + "px";
+            dot.style.height = elemHeight + "px";
+            dot.style.marginRight = hDist + "px";
+            dot.style.marginBottom = vDist + "px";
+            dot.style.borderRadius = "50%";
+            dot.style.position = "absolute";
+            dot.id = "s" + i + j;
+
+            dot.classList.add(colorCLass);
+
+            matrix.style.width = nrCols * (elemWidth + hDist) + "px";
+            matrix.style.height = nrLines * (elemHeight + vDist) + "px";
+            
+            matrix.appendChild(dot);
+            return dot;
+        }
+
+        function drawMatrix() {
+            var xpos;
+            var ypos;
+
+            for (i = 0; i < nrLines; i++) {
+                for (j= 0; j < nrCols; j++) {
+                    xpos = (elemWidth + hDist) * j;
+                    ypos = (elemHeight + vDist) * i;
+
+                    eachElem = addElem("default", i, j);
+                    eachElem.style.top = ypos + "px";
+                    eachElem.style.left = xpos + "px";                 
+
+                    collection.push({
+                        element: eachElem,
+                        x: xpos,
+                        y: ypos
+                    });
+                }
+            }
+            squareParentOffsetLeft = collection[0].element.parentElement.offsetLeft;
+            squareParentOffsetTop = collection[0].element.parentElement.offsetTop;
+        }
+        drawMatrix();
+
+        body.addEventListener("mousemove", mousemove);
+        function mousemove(e) {
+ 
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            var dX;
+            var dY;
+            var distanta;
+            var angle;
+            var squareParent;
+
+            for (var k in collection) {
+                dX = collection[k].x;
+                dY = collection[k].y;
+                elem = collection[k].element;
+                squareParent = elem.parentElement;
+                angle = Math.atan2(dY - mouseY, dX - mouseX);
+                
+                distanta = Math.floor(Math.sqrt(Math.pow(mouseX - (dX + (elemWidth/2)), 2) + Math.pow(mouseY - (dY+(elemHeight/2)), 2)));
+                
+                if (distanta < r) {
+                    elem.style.left = ((dX - squareParentOffsetLeft) + Math.cos(angle) * r) + "px";
+                    elem.style.top = ((dY - squareParentOffsetTop) + Math.sin(angle) * r) + "px";
+                    elem.className = "green";
+                } else {
+                    elem.style.left = dX + "px"; 
+                    elem.style.top = dY + "px";
+                    elem.className = "default";   
+                }
+
+                // if(distanta < r) {
+                //     elem.className = "green";
+                // } else {
+                //     elem.className = "default";   
+                // }
+            }
+        }
+   
+
+    </script>
+</body>
+</html>
