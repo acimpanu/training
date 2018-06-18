@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+
+        // function star(n) {
+        //     if (n == 0 || n > 20) {
+        //         return "";
+        //     }       
+        //     return "*" + star(n-1);
+        // }
+
+        // function designDown(row) {
+        //     if (row == 0) {
+        //         return "";
+        //     }
+        //     return  star(row) + "\n" + designDown(row - 1) ;
+        // }
+
+        // function designUp(row) {
+        //     if (row == 0) {
+        //         return "";
+        //     }
+
+        //     return  designUp(row - 1) + "\n" + star(row);
+        // }
+
+        // console.log(designUp(3) + "\n" +  designDown(2));
+
+
+        // -----------------------------------
+
+        n = 7;
+
+        function star(n) {
+            if (n == 0 || n > 20) {
+                return "";
+            }       
+            return document.write("&#9723;") + star(n-1);
+        }
+
+        function designDown(row) {
+            if (row == 0) {
+                return "";
+            }
+            return  star(row) + document.write("<br/>") + designDown(row - 1) ;
+        }
+
+        function designUp(row) {
+            if (row == 0) {
+                return "";
+            }
+
+            return  designUp(row - 1) + star(row) + document.write("<br/>");
+        }
+
+        designUp(n) + "\n" +  designDown(n-1);
+
+    </script>
+</body>
+</html>
