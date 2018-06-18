@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+        <style>
+            .myLine {
+                background: black;
+                height: 2px;
+                position: absolute;
+            }
+        </style>
+</head>
+<body>
+    
+    <script>
+
+        var degToRad = Math.PI / 180.0;
+        var depth = 9;
+        var holder = document.getElementsByTagName("body")[0];
+
+        function drawLine(x1, y1, x2, y2) {
+            var distance = Math.sqrt(Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
+
+            var xMid = (x1 + x2)/2;
+            var yMid = (y1 + y2)/2;
+
+            var grRad = Math.atan2(y1-y2, x1-x2);
+            var grDeg = (grRad * 180) / Math.PI;
+
+            var line = document.createElement("div");
+
+            line.style.width = distance + "px";
+            line.className = "myLine";
+            line.style.top = yMid + "px";
+            line.style.left = xMid - (distance / 2)  + "px";
+            line.style.transform = "rotate(" + grDeg + "deg)";
+            holder.appendChild(line);
+        }
+
+        function drawTree(x1, y1, angle, depth) {
+            if (depth!=0) {
+                var x2 = x1 - (Math.cos(angle * degToRad) * depth * 10.0);
+                var y2 = y1 - (Math.sin(angle * degToRad) * depth * 10.0);
+                drawLine(x1, y1, x2, y2);
+                drawTree(x2, y2, angle - 30, depth - 1);
+                drawTree(x2, y2, angle + 30, depth - 1); 
+            }
+        }
+
+        drawTree(300, 500, 90, depth);
+
+    </script>
+</body>
+</html>

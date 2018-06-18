@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        function hanoi(n, begin, aux, end) {
+            if (n > 0) {
+                hanoi(n-1, begin, end, aux);
+                //hanoi(1, begin, aux, end);
+                document.write('Move disc ' + n + ' from ' + begin + ' to ' + end + "<br/>");
+                hanoi(n-1, aux, begin, end);
+            }
+        }
+
+        hanoi(4,"Begin", "Auxiliar", "End");
+
+    </script>
+</body>
+</html>

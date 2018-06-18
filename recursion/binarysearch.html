@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <div class="suport"></div>
+    <script>
+        var arr = [0, 3, 7, 9, 11, 14, 15, 17, 18, 21, 24, 25];
+        
+        function search(arr, start, end, val) {
+            var mid = Math.floor(start + (end - start)/2);
+            if(end < start) return;
+
+            if (arr[mid] == val) {
+                return mid;
+            }
+            else if (arr[mid] < val) {
+                return search(arr, mid + 1, end, val);
+            }
+            else {
+                return search(arr, start, mid-1, val);
+            }
+        }
+
+        var loc = search(arr, 0, arr.length - 1, 11);
+
+        if (loc > 0) {
+            console.log("The number you are searching for is at index: " + loc);
+        } else {
+            console.log("Not found!");
+        }
+
+    </script>
+</body>
+</html>
