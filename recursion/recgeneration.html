@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <script>
+        var arr = ["0", "1"];
+        // var results = [];
+        // function combine(arr, n) {
+            
+        //     if (n == 0) {
+        //         return;
+        //     }
+
+        //     for (var i = 0; i < arr.length; i++) {
+        //         for (let j = 0; j < arr.length; j++) {
+        //             results.push(arr[i] + ' ' + arr[j]);
+        //         }
+        //     }
+
+        //     return combine(arr, n-1)
+        // }
+
+        // console.log(combine(arr, 1));
+        // console.log(results);
+
+        var alfabet = ["0", "1"];
+        var n = 2;
+        function generate(pas, s, index) {
+            if (pas == n) {
+                console.log(s);
+            } else {
+                generate(pas + 1, s + alfabet[index], index);
+                generate(pas + 1, s + alfabet[index + 1], index);
+            }
+        }
+
+        generate(0, "", 0);
+
+        //console.log (combine(arr, "", 0));
+    </script>
+</body>
+</html>

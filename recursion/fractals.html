@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+    <style>
+    div {
+        border: 1px solid black;
+        position: absolute;
+    }
+
+    div:first-of-type {
+        border: 3px solid black;
+    }
+</style>
+<body>
+    <script>
+        var holder = document.getElementsByTagName("body")[0];
+        function drawSquare(x, y, sWidth) {
+            var patrat = document.createElement("div");
+
+            patrat.style.width = sWidth + "px";
+            patrat.style.height = sWidth + "px";
+            patrat.style.left = x + "px";
+            patrat.style.top = y + "px";
+            holder.appendChild(patrat);
+        }
+
+        function draw(n, x, y, sWidth) {
+            if (n == 0) {
+                return;
+            }
+
+            drawSquare(x, y, sWidth);
+
+            var ratio = 2;
+            setTimeout(function (){
+                draw(n-1, x - sWidth/4, y - sWidth/4, sWidth/ratio);  // top left  
+                draw(n-1, x - sWidth/4, y + sWidth - sWidth/4, sWidth/ratio);  // bottom left
+                draw(n-1, x + sWidth - sWidth/4, y - sWidth/4, sWidth/ratio);  // top right 
+                draw(n-1, x + sWidth - sWidth/4, y + sWidth - sWidth/4, sWidth/ratio);  // bottom right
+            }, 300);
+        }
+
+        draw(4, 150, 150, 200);
+
+    </script>
+</body>
+</html>
