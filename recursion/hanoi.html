@@ -1,18 +1,131 @@
 <!DOCTYPE HTML>
 <html>
+    <head>
+        <style>
+            #container {
+                width: 500px;
+                margin-bottom: 50px;
+            }
+
+            #bar1,
+            #bar2,
+            #bar0 {
+                width: calc(100% / 3);
+                height: 100%;
+                display: inline-block;
+                float: left;
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            .disk {
+                text-align: center;
+                box-sizing: border-box;
+                margin: 10px auto;
+                height: 40px;
+                background: lightgrey;
+            }
+
+            .selected {
+                background: lightseagreen;
+            }
+        </style>
+    </head>
 <body>
+    <div id="container">
+        <div id="bar0" class="bar"></div>
+        <div id="bar1" class="bar"></div>
+        <div id="bar2" class="bar"></div>
+    </div>
     <script>
-        function hanoi(n, begin, aux, end) {
-            if (n > 0) {
-                hanoi(n-1, begin, end, aux);
-                //hanoi(1, begin, aux, end);
-                document.write('Move disc ' + n + ' from ' + begin + ' to ' + end + "<br/>");
-                hanoi(n-1, aux, begin, end);
+        var noDisks = 4;
+
+        var bar1 = document.getElementById("bar1");
+        var bar2 = document.getElementById("bar2");
+        var bar3 = document.getElementById("bar3");
+
+        function drawDisk(noDisks) {
+            for (var i = 0; i < noDisks; i++) {
+                var disk = document.createElement("div");
+                disk.className = "disk";
+                disk.style.width = (100 - 60) * (i /noDisks) + 60 +"%";
+                disk.id = "bar0_disc" + (noDisks - i - 1);
+                bar0.appendChild(disk);
+
+                disk = document.createElement("div");
+                disk.className = "disk";
+                disk.id = "bar1_disc" + (noDisks - i - 1);
+                disk.style.width = (100 - 60) * (i /noDisks) + 60 +"%";
+                bar1.appendChild(disk);
+
+                disk = document.createElement("div");
+                disk.className = "disk";
+                disk.id = "bar2_disc" + (noDisks - i - 1);
+                disk.style.width = (100 - 60) * (i /noDisks) + 60 +"%";
+                bar2.appendChild(disk);
             }
         }
 
-        hanoi(4,"Begin", "Auxiliar", "End");
+        var moves = [];
+        var discs = [];
+        var iPos = -1;
 
+        function init() {
+            drawDisk(noDisks);
+            for (var i = 0; i < noDisks; i++) {
+                discs.push(0);
+            }
+            move(0, 0, 2);
+
+            var interval = setInterval(function(){
+                //debugger;
+                if (iPos == moves.length){
+                    clearInterval(interval);
+                    iPos = -1;
+                    return;
+                } else if (iPos == -1){
+                    for (var i = 0; i < discs.length; i++){
+                        document.getElementById("bar0_disc" + i).className = "disk selected";
+                        document.getElementById("bar1_disc" + i).className = "disk";
+                        document.getElementById("bar2_disc" + i).className = "disk";
+                    }
+                } else {
+                    var m = moves[iPos];
+                    document.getElementById("bar" + m[1] + "_disc" + m[0]).className = "disk";
+                    document.getElementById("bar" + m[2] + "_disc" + m[0]).className = "disk selected";
+                }
+                iPos++;
+            }, 400);
+        }
+
+        init();
+
+        function move(disc, src, dst) {
+            //debugger;
+            var s = false;
+
+            for (var i = disc + 1; i < discs.length; i++) {
+                if(discs[i] == src) { 
+                    s = true; 
+                    break;
+                }
+            }
+
+            if(!s) {
+                moves.push([disc, discs[disc], dst]);
+                //console.log(moves);
+                discs[disc] = dst;
+            } else {
+                var tempDst = src == 0 && dst == 1 || 
+                    src == 1 && dst == 0 ? 2 : src == 0 && dst == 2 ||
+                    src == 2 && dst == 0 ? 1 : 0;   
+
+                move(disc + 1, src, tempDst);
+                moves.push([disc, discs[disc], dst]);
+                discs[disc] = dst;
+                move(disc+1, tempDst, dst);
+            }
+        }
     </script>
 </body>
 </html>
