@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            .slider {
+                height: 5px;
+                margin-top: 20px;
+                display: inline-block;
+                position: relative;
+                display: block;
+                margin: 50px 50px;
+                background: grey;
+            }
+
+            .thumb {
+                background: seagreen;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%; 
+                position: absolute;
+                top: -10px;
+                left: 13px;
+                margin-left: -13px;
+                cursor: pointer;
+                opacity: .8;
+            }
+
+            .slider.pink {
+                background: red;;
+            }
+
+            .slider.grey {
+                background: black;
+            }
+
+            .slider.pink .thumb {
+                background: pink;
+            }
+
+            .slider.grey .thumb {
+                background: grey;
+            }
+
+            .btn {
+                border: 1px solid black;
+                display: inline-block;
+                width: 30px;
+                height: 20px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    
+<body>
+
+    <div id="slider1"></div>
+    <div id="slider2"></div>
+
+    <script src="eventtarget.js" type="text/javascript"></script>
+    <script src="slider.js" type="text/javascript"></script>
+    <!--<script src="slider-mixin.js" type="text/javascript"></script> -->
+
+    <script>
+        var container1 = document.getElementById("slider1");
+        var container2 = document.getElementById("slider2");
+
+        var slider1 = new Slider(100, 130, 200, container1, "pink");
+        var slider2 = new Slider(150, 150, 250, container2, "grey");   
+
+        // setTimeout(function (){
+        //     slider1.destroy();
+        // }, 900);
+    </script>
+</body>
+</html>
