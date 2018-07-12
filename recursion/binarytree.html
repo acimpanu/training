@@ -13,7 +13,7 @@
     
     <script>
 
-        var degToRad = Math.PI / 180.0;
+        var degToRad = Math.PI / 180;
         var depth = 9;
         var holder = document.getElementsByTagName("body")[0];
 
@@ -38,15 +38,15 @@
 
         function drawTree(x1, y1, angle, depth) {
             if (depth!=0) {
-                var x2 = x1 - (Math.cos(angle * degToRad) * depth * 10.0);
-                var y2 = y1 - (Math.sin(angle * degToRad) * depth * 10.0);
+                var x2 = x1 - (Math.cos(angle * degToRad) * depth * 10);
+                var y2 = y1 - (Math.sin(angle * degToRad) * depth * 10);
                 drawLine(x1, y1, x2, y2);
                 drawTree(x2, y2, angle - 30, depth - 1);
                 drawTree(x2, y2, angle + 30, depth - 1); 
             }
         }
 
-        drawTree(300, 500, 90, depth);
+        drawTree(300, 500, 90, 6);
 
     </script>
 </body>
