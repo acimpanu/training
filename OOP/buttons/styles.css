@@ -1,0 +1,49 @@
+.btn {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid grey;
+    overflow: hidden;
+}
+
+.groupSuport.green .btn.btn--disabled,
+.groupSuport.blue .btn.btn--disabled {
+    background: grey;
+    border: none;
+}
+
+.groupSuport.green .btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: green;
+    margin: 0 5px;
+    border: none;
+}
+
+.groupSuport.green .btn--selected {
+    background: red;
+    border: none;
+}
+
+.groupSuport.blue .btn {
+    background: blue;
+    margin: 5px 5px;
+    border: none;
+}
+
+.groupSuport.blue .btn--selected:before {
+    content: '\2713';
+    color: #fff;
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.groupSuport.groupSuport--disabled  .btn {
+    background: grey;
+}
+
+#grup1,
+#grup2 {
+    margin-bottom: 20px;
+}

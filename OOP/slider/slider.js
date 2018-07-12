@@ -72,6 +72,13 @@ Object.assign(Slider.prototype, {
         console.log("valoare:" + valoare);
         console.log("procent:", percent);
         this.thumb.style.left = newLeft + 'px';
+        this.fire({
+            type: "change", 
+            date: {
+                value: valoare,
+                percent: percent
+            }
+        });
     },
 
     mouseUp: function(e) {
@@ -88,6 +95,6 @@ Object.assign(Slider.prototype, {
         document.removeEventListener('mouseup', this.mouseUpListener);
         document.removeEventListener('mousemove', this.mouseMoveListener);
         document.removeEventListener('mousedown', this.mouseDownListener);
-        this.parentContainer.removeChild(this.slider);
+        //this.parentContainer.removeChild(this.slider);
     },
 });
