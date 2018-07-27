@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            ul {
+                width: 450px;
+                float: left;
+            }
+
+            li {
+                background: lightyellow;
+                list-style: none;
+                width: 230px;
+                float: left;
+                height: 48px;
+                padding-right: 70px;
+            }
+
+            li:nth-of-type(2n+1) {
+                background: pink;
+            }
+
+            .id,
+            .description {
+                width: 200px;
+                background: white;
+                float: left;
+                font-family: arial;
+                font-size: 14px;
+                line-height: 14px;
+                padding: 5px;
+                box-sizing: border-box;
+            }
+
+            .plus,
+            .close {
+                float: right;
+                width: 30px;
+                font-size: 14px;
+                line-height: 24px;
+                text-align: center;
+                background: white;
+            }
+
+            .description,
+            .close {
+                background: red;
+            }
+        </style>
+    </head>
+
+<body>
+    <ul id="dynamicList">
+        <!--<li>
+            <div class="id">Item 0</div>
+            <div class="minus" onclick="deleteElement()">-</div>
+            <div class="description">Description 0</div>
+            <div class="plus" onclick="newElement()">+</div>
+        </li>-->
+    </ul>
+    <script>
+        var list = document.getElementById('dynamicList');
+        var myList = [];
+        var lastid = 0;
+
+        var bgcolorlist = new Array("#DFDFFF", "#FFFFBF", "#80FF80", "#EAEAFF", "#C9FFA8", "#F7F7F7", "#FFFFFF", "#DDDD00");
+
+        var activeElem;
+
+        function createNewListItem(itemid) {
+            var item = document.getElementById(itemid);
+            var listEl = document.createElement("li");
+            var id = document.createElement("div");
+            var close = document.createElement("div");
+            var description = document.createElement("div");
+            var add = document.createElement("div");
+            
+            listEl.setAttribute("id", "item" + lastid);
+            listEl.style.background = bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)];
+            list.appendChild(listEl);
+            
+            id.className = "id";
+            id.textContent = "item";
+            listEl.appendChild(id);
+            
+            close.className = "close";
+            close.textContent = "\u00D7";
+            //close.setAttribute("onClick",'removeEl("'+'item' + lastid + '")');
+            listEl.appendChild(close);
+
+            description.className = "description";
+            description.textContent = "description";
+            listEl.appendChild(description);
+
+            add.className = "plus";
+            add.textContent = " + ";
+            listEl.appendChild(add);
+
+            lastid++;
+
+            add.addEventListener("click", addAfter);
+            close.addEventListener("click", removeEl);
+
+            return listEl;
+        }
+
+        function addAfter(){
+            const y = createNewListItem();
+            const x = this.parentElement;
+            x.insertAdjacentElement("afterend", y);
+        }
+
+        function removeEl(event) {
+            if (list.childElementCount === 1) {
+                return;
+            }
+            var remEl = event.currentTarget.parentElement;
+            remEl.getElementsByClassName("plus")[0].removeEventListener("click", addAfter);
+            remEl.getElementsByClassName("close")[0].removeEventListener("click", removeEl);
+            list.removeChild(remEl);
+        }
+
+        createNewListItem(); 
+
+
+    </script>
+</body>
+</html>
