@@ -1,0 +1,95 @@
+body {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;  
+    margin: 0;  
+}
+
+.btn {
+    display: block;
+    overflow: hidden;
+    background: lightyellow;
+}
+
+.btn.btn--selected {
+    background: black;
+}
+
+/*.groupSuport.green .btn.btn--disabled,
+.groupSuport.blue .btn.btn--disabled {
+    background: grey;
+    border: none;
+}*/
+
+.groupSuport.green .btn {
+    display: inline-block;
+    background: green;
+    margin: 0 5px;
+    border: none;
+}
+
+.groupSuport.green .btn--selected {
+    background: red;
+    border: none;
+}
+
+.groupSuport.groupSuport--disabled  .btn {
+    background: grey;
+}
+
+#holder,
+#clear,
+#radio,
+#undoredo {
+    display: inline-block;
+    float: left;
+    margin: 0 10px 5px 0;
+    font-family: arial;
+    font-size: 11px;
+    text-align: center;
+    line-height: 25px;
+}
+
+#clear .btn {
+    overflow: visible;
+    color: green;
+    width: 50px;
+    height: 25px;
+    border: 1px solid red;
+    box-sizing: border-box;
+    line-height: 22px;
+}
+
+#clear .btn.btn--selected {
+    background: lightyellow;
+}
+
+#radio .btn,
+#undoredo .btn {
+    width: 50px;
+    height: 25px;
+    overflow: visible;
+    margin: 0;
+    color: #fff;
+    display: inline-block;
+}
+
+#holder {
+    width: 200px;
+    height: 100px;
+        position: relative;
+}
+
+#support {
+    display: inline-block;
+    width: 110px;
+}
+
+#undoredo .btn {
+    background: gray;
+}
+
+#undoredo .btn.btn--disabled {
+    background: darkgray;
+}
