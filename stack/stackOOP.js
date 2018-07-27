@@ -1,23 +1,23 @@
-function Stack() {
-   var stack1 = [];
-   var maxSize = 5
+function Stack(maxSize) {
+   var stack = [];
+   this.maxSize = maxSize;
 
    this.push = function(x){
-       if (stack1.length < maxSize) {
-            stack1.push(x);
+       if (stack.length < maxSize) {
+            stack.push(x);
        }
    };
 
    this.pop = function(){
-       return stack1.pop();
+       return stack.pop();
    };
 
    this.topEl = function(){
-       return stack1[stack1.length-1];
+       return stack[stack.length-1];
    };
 
    this.isEmpty = function(){
-       if (stack1.length == 0) {
+       if (stack.length == 0) {
            return true;
        } else {
            return false;
@@ -25,7 +25,7 @@ function Stack() {
    };
 
    this.isFull = function() {
-        if (stack1.length == maxSize) {
+        if (stack.length == maxSize) {
             return true; 
         } else {
             return false;
@@ -33,22 +33,14 @@ function Stack() {
    }
 
    this.getSize = function(){
-       return stack1.length;
+       return stack.length;
    };
 
    this.clear = function(){
-       stack1 = [];
+       stack = [];
    };
 
    this.print = function(){
-       console.log(stack1.toString());
+       return stack.toString();
    };
 }
-
-var myStack = new Stack();
-myStack.push(1);
-myStack.push(2);
-myStack.push(3);
-myStack.push(4);
-
-//myStack.print();
