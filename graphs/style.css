@@ -1,0 +1,51 @@
+body {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;  
+    margin: 0;  
+}
+
+svg {
+    box-sizing: border-box;
+}
+
+#pie,
+#legend,
+#donut,
+#donut2,
+#horizontal,
+#vertical {
+    margin: 20px 50px 0 100px;
+}
+
+.circular-chart {
+    stroke: darkgrey;
+}
+
+.dark-circle {
+    stroke: lightgray;
+    stroke-width: 6.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 6.8;
+    /*stroke-linecap: round;*/
+    animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        stroke-dasharray: 0 100;
+    }
+}
+
+#donut svg {
+    height: 130px;
+}
+
+svg {
+    display: inline-block;
+    vertical-align: middle;
+}

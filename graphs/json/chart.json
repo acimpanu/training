@@ -1,0 +1,13 @@
+{
+    "sectors": [
+        {"label": "Advanced Digital Camera", "percent": "39"},
+        {"label": "Full Frame digital Camera", "percent": "3"},
+        {"label": "Independent Filmmaker Camcorder", "percent": "13"},
+        {"label": "Lens Adapter", "percent": "12"},
+        {"label": "Macro Zoom Lens", "percent": "21"},
+        {"label": "Slim digital Camera", "percent": "2"},
+        {"label": "SLR Digital Camera", "percent": "2"},
+        {"label": "USB Cable", "percent": "8"}
+    ]
+}
+
