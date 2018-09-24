@@ -1,0 +1,32 @@
+body {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;  
+    margin: 0; 
+    box-sizing: border-box; 
+}
+
+
+#holder {
+    margin: 100px 0 0 100px;
+    width: 1000px;
+    height: 600px;
+}
+
+.spacer {
+    fill: lightgray;
+    display: none;
+}
+
+svg {
+    box-sizing: border-box;
+}
+
+rect {
+    box-sizing: border-box;
+}
+
+.boundingBox {
+    overflow: hidden;
+}
